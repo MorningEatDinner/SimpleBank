@@ -6,7 +6,6 @@ package db
 
 import (
 	"context"
-	db "github.com/xiaorui/simplebank/db/sqlc"
 	"database/sql"
 )
 
