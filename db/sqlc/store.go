@@ -6,6 +6,7 @@ import (
 	"fmt"
 )
 
+// mock就是根据这个接口去创建一个实现了这个接口的结构体， 区别于SQLStore
 type Store interface {
 	Querier
 	TransferTx(ctx context.Context, arg TransferTxParams) (TransferTxResult, error)

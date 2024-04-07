@@ -85,7 +85,7 @@ func TestGetAccountAPI(t *testing.T) {
 			defer ctrl.Finish()
 
 			store := mockdb.NewMockStore(ctrl)
-			tc.buildStubs(store)
+			tc.buildStubs(store) //构建存根
 			//开始进行http测试
 			server := NewServer(store)
 			recorder := httptest.NewRecorder()
@@ -94,7 +94,7 @@ func TestGetAccountAPI(t *testing.T) {
 			request, err := http.NewRequest(http.MethodGet, url, nil)
 			require.NoError(t, err)
 
-			server.router.ServeHTTP(recorder, request)
+			server.router.ServeHTTP(recorder, request) // 运行一个request，保存在recorder上
 			tc.checkResponse(t, recorder)
 		})
 	}
@@ -114,7 +114,7 @@ func requireBodyMatchAccount(t *testing.T, body *bytes.Buffer, account db.Accoun
 	require.NoError(t, err)
 
 	var gotAccount db.Account
-	err = json.Unmarshal(data, &gotAccount) // 将json数据解析并且映射到目标变量
+	err = json.Unmarshal(data, &gotAccount) // 二进制->json->结构体
 	require.NoError(t, err)
 	require.Equal(t, gotAccount, account)
 }
